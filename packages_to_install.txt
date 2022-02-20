@@ -1,4 +1,5 @@
 react-native-onboarding-swiper
+react-native-reanimated(v2 has compatibility issues with Expo)
 expo-app-loading
 react-native-bouncy-checkbox
 expo-font
