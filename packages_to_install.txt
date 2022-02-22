@@ -2,7 +2,5 @@ react-native-onboarding-swiper
 react-native-reanimated(v2 has compatibility issues with Expo)
 expo-app-loading
 react-native-bouncy-checkbox
-expo-font
 // if needed : expo-google-font
 // last resort : nativebase
-react-navigation (all dependencies of this + drawer navigation since that's how we navigate around the app without a ugly bottom navigation bar)

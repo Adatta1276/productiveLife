@@ -4,45 +4,22 @@ import {
   Text,
   View,
   Image,
+  TouchableOpacity,
   useWindowDimensions,
+  FlatList,
+  TouchableNativeFeedback,
 } from "react-native";
 import { Shadow } from "react-native-shadow-2";
 import { useFonts } from "expo-font";
-
-const colors = {
-  offWhite: "#FFF9EC",
-  chrome: "#F9BE7C",
-  reddishPink: "#E46472",
-  randomBlue: "#6488E4",
-  greenish: "#309397",
-  bluishBlack: "#0D253F",
-};
-
-/* COLORS FOR SIGN UP AND LOGIN SCREEN (OLD ONE NOT METAFY) : 
-
-#050507
-#554454
-#8D0696
-#9D0570
-#B8B8B8
-#C44BC1
-
-*/
-
-const ProgressCard = (props) => {
-  return (
-    <View style={{ alignItems: "center", justifyContent: "center" }}>
-      <View
-        style={{
-          backgroundColor: props.backgroundColor, //"#E46472"
-          width: props.cardWidth,
-          height: props.cardHeight,
-          borderRadius: props.borderRadius,
-          //bottom: '92%',
-        }}
-      ></View>
-    </View>
-  );
+var clickCount = 0;
+var appTheme = "dark";
+var themeData = {
+  darkTheme: {
+    textColor: "#ffffff",
+  },
+  lightTheme: {
+    textColor: "#000000",
+  },
 };
 
 export default function App() {
@@ -52,42 +29,106 @@ export default function App() {
     "DMSans-Bold": require("./assets/fonts/DM_Sans/DMSans-Bold.ttf"),
     "Poppins-Bold": require("./assets/fonts/Poppins/Poppins-Bold.ttf"),
   });
- {/*DO FLOATING ACTION BUTTON WITH VIEW*/}
-  return ( 
-    <View style={styles.container}>
-    <StatusBar style="auto" />
-    <View style={{width:230, height:170, backgroundColor:'#031956', borderRadius:40, elevation:30, shadowColor:'#344fa1'}}></View>
 
-      
-    
+  if (!loaded) {
+    return null;
+  }
+
+  return (
+    <View style={styles.container}>
+      <Image
+        source={
+          appTheme === "light"
+            ? require("./assets/images/intro.jpg")
+            : require("./assets/images/intro_dark.jpg")
+        }
+        style={{ width: 350, height: 350, bottom: "5%" }}
+      />
+      <Text
+        style={{
+          fontFamily: "Poppins-Bold",
+          fontSize: 30,
+          bottom: "1%",
+          color:
+            appTheme === "light"
+              ? themeData.lightTheme.textColor
+              : themeData.darkTheme.textColor,
+        }}
+      >
+        Manage your tasks
+      </Text>
+      <Text
+        style={{
+          fontFamily: "Poppins",
+          fontSize: 16,
+          textAlign: "center",
+          top: "1%",
+          color:
+            appTheme === "light"
+              ? themeData.lightTheme.textColor
+              : themeData.darkTheme.textColor,
+        }}
+      >
+        Organize all of your to-do's in lists and projects. Color tag them to
+        set priorities
+      </Text>
+      <Text
+        style={{
+          fontFamily: "Poppins",
+          fontSize: 16,
+          textAlign: "center",
+          top: "0.3%",
+          color:
+            appTheme === "light"
+              ? themeData.lightTheme.textColor
+              : themeData.darkTheme.textColor,
+        }}
+      >
+        and categories.
+      </Text>
+      <View
+        onStartShouldSetResponder={() => {
+          clickCount = clickCount + 1;
+          console.log(`The view has been clicked ${clickCount} times so far.`);
+        }}
+        style={{
+          width: 70,
+          height: 70,
+          backgroundColor: "#f7608f",
+          elevation: 10,
+          shadowColor: "#fff",
+          borderRadius: 60,
+          alignItems: "center",
+          justifyContent: "center",
+          top: "5%",
+        }}
+      >
+        <Text
+          style={{
+            textAlign: "center",
+            fontFamily: "DMSans-Bold",
+            bottom: "7%",
+            fontSize: 30,
+            color:
+              appTheme === "light"
+                ? themeData.lightTheme.textColor
+                : themeData.darkTheme.textColor,
+          }}
+        >
+          →
+        </Text>
+      </View>
+
+      <StatusBar style="auto" translucent={true} />
     </View>
   );
 }
 
-const styles = StyleSheet.create({ 
+const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#344fa1",
+    backgroundColor: appTheme === "light" ? "#fff" : "#000", //#8b9fda
     alignItems: "center",
     justifyContent: "center",
   },
 });
-
-/* import CircularProgress from "react-native-circular-progress-indicator";
-import { StyleSheet, Text, View } from "react-native";
-
-
-export default function App() {
-  return (
-    <View style={{ alignItems: "center", justifyContent: "center", flex: 1, backgroundColor:'#000' }}>
-      <CircularProgress
-        value={200}
-        radius={120}
-        duration={3000}
-        activeStrokeColor={"#2465FD"}
-        activeStrokeSecondaryColor={"#C25AFF"}
-        maxValue={200}
-      />
-    </View>
-  );
-} */
