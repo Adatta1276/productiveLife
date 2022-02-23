@@ -1,3 +1,4 @@
+var appMode = "dev";
 import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
@@ -9,16 +10,21 @@ import {
   FlatList,
   TouchableNativeFeedback,
 } from "react-native";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Shadow } from "react-native-shadow-2";
 import { useFonts } from "expo-font";
 var clickCount = 0;
 var appTheme = "dark";
+
 var themeData = {
   darkTheme: {
     textColor: "#ffffff",
+    buttonShadowRadius: 17,
   },
   lightTheme: {
     textColor: "#000000",
+    buttonShadowRadius: 10,
   },
 };
 
@@ -86,38 +92,54 @@ export default function App() {
       >
         and categories.
       </Text>
-      <View
-        onStartShouldSetResponder={() => {
-          clickCount = clickCount + 1;
-          console.log(`The view has been clicked ${clickCount} times so far.`);
-        }}
-        style={{
-          width: 70,
-          height: 70,
-          backgroundColor: "#f7608f",
-          elevation: 10,
-          shadowColor: "#fff",
-          borderRadius: 60,
-          alignItems: "center",
-          justifyContent: "center",
-          top: "5%",
-        }}
+      <Shadow
+        distance={
+          appTheme === "light"
+            ? themeData.lightTheme.buttonShadowRadius
+            : themeData.darkTheme.buttonShadowRadius
+        }
+        startColor={"rgba(247,96,143,0.6)"}
+        paintInside={true}
+        offset={[0, 32.5]}
       >
-        <Text
+        <TouchableOpacity
+          touchSoundDisabled={true}
+          activeOpacity={0.6}
+          onPress={() => {
+            clickCount = clickCount + 1;
+            console.log(
+              `The view has been clicked ${clickCount} times so far.`
+            );
+          }}
           style={{
-            textAlign: "center",
-            fontFamily: "DMSans-Bold",
-            bottom: "7%",
-            fontSize: 30,
-            color:
-              appTheme === "light"
-                ? themeData.lightTheme.textColor
-                : themeData.darkTheme.textColor,
+            // elevation: 45,
+            borderRadius: 100,
+            //shadowColor: "rgb(0,204,255)",
+            width: 70,
+            height: 70,
+            backgroundColor: "#f7608f",
+            borderRadius: 100,
+            alignItems: "center",
+            justifyContent: "center",
+            top: "45%",
           }}
         >
-          →
-        </Text>
-      </View>
+          <Text
+            style={{
+              textAlign: "center",
+              fontFamily: "DMSans-Bold",
+              bottom: "7%",
+              fontSize: 30,
+              color:
+                appTheme === "light"
+                  ? themeData.lightTheme.textColor
+                  : themeData.darkTheme.textColor,
+            }}
+          >
+            →
+          </Text>
+        </TouchableOpacity>
+      </Shadow>
 
       <StatusBar style="auto" translucent={true} />
     </View>
