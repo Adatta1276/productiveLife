@@ -6,14 +6,18 @@ import {
   View,
   Image,
   TouchableOpacity,
+  Pressable,
   useWindowDimensions,
   FlatList,
-  TouchableNativeFeedback,
 } from "react-native";
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Shadow } from "react-native-shadow-2";
 import { useFonts } from "expo-font";
+import { Constants } from "expo-constants";
+import MainScreen from "./screens/MainScreen";
+const Stack = createNativeStackNavigator();
+
 var clickCount = 0;
 var appTheme = "dark";
 
@@ -28,6 +32,7 @@ var themeData = {
   },
 };
 
+//! Main function
 export default function App() {
   const [loaded] = useFonts({
     Poppins: require("./assets/fonts/Poppins/Poppins-Regular.ttf"),
@@ -40,6 +45,35 @@ export default function App() {
     return null;
   }
 
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Onboarding"
+          component={OnboardingScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="SignUpScreen"
+          component={SignUpScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="SignInScreen"
+          component={SignInScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="MainScreen"
+          component={MainScreen}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+function OnboardingScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Image
@@ -92,43 +126,71 @@ export default function App() {
       >
         and categories.
       </Text>
+
+      <TouchableOpacity
+        style={{
+          bottom: "68%",
+          left: "35%",
+          width: 85,
+          height: 30,
+          backgroundColor: "#9b86fd",
+          borderRadius: 10,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+        onPress={() => {
+          navigation.navigate("MainScreen");
+        }}
+      >
+        <Text
+          style={{
+            color: "#fff",
+            top: "1%",
+            fontFamily: "Poppins",
+            fontWeight: "900",
+          }}
+        >
+          Skip
+        </Text>
+      </TouchableOpacity>
+
       <Shadow
         distance={
           appTheme === "light"
             ? themeData.lightTheme.buttonShadowRadius
             : themeData.darkTheme.buttonShadowRadius
         }
-        startColor={"rgba(247,96,143,0.6)"}
+        startColor={"rgba(247,96,143,0.5)"}
         paintInside={true}
-        offset={[0, 32.5]}
+        offset={[0, 13]}
       >
         <TouchableOpacity
           touchSoundDisabled={true}
           activeOpacity={0.6}
           onPress={() => {
-            clickCount = clickCount + 1;
-            console.log(
-              `The view has been clicked ${clickCount} times so far.`
-            );
+            navigation.navigate("MainScreen");
           }}
           style={{
+            alignItems: "center",
+            justifyContent: "center",
             // elevation: 45,
             borderRadius: 100,
             //shadowColor: "rgb(0,204,255)",
             width: 70,
             height: 70,
-            backgroundColor: "#f7608f",
+            backgroundColor: "rgba(247,96,143,1)",
             borderRadius: 100,
-            alignItems: "center",
-            justifyContent: "center",
-            top: "45%",
+
+            top: "17%",
           }}
         >
           <Text
             style={{
               textAlign: "center",
-              fontFamily: "DMSans-Bold",
-              bottom: "7%",
+              fontFamily: "Poppins-Bold",
+              fontWeight: "900",
+              paddingBottom: 5,
+              //bottom: "7%",
               fontSize: 30,
               color:
                 appTheme === "light"
@@ -140,8 +202,38 @@ export default function App() {
           </Text>
         </TouchableOpacity>
       </Shadow>
+      <Pressable
+        style={{ top: "8%" }}
+        onPress={() => {
+          navigation.navigate("MainScreen");
+        }}
+      >
+        <Text
+          style={{
+            color: "#fff",
+            fontFamily: "Poppins",
+          }}
+        >
+          Already a member? Sign in
+        </Text>
+      </Pressable>
+      <StatusBar style="auto" />
+    </View>
+  );
+}
 
-      <StatusBar style="auto" translucent={true} />
+function SignUpScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Text style={{ fontFamily: "Poppins", fontSize: 18 }}>Sign up here!</Text>
+    </View>
+  );
+}
+
+function SignInScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Text style={{ fontFamily: "Poppins", fontSize: 18 }}>Sign in here!</Text>
     </View>
   );
 }
