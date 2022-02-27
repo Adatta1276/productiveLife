@@ -2,3 +2,10 @@
 2nd card color = #e46471
 3rd card color = #f9be7c
 4th card color = #6588e4
+
+
+
+BACKGROUND COLOR = #fff
+top card color = #6f4bff
+to do card color = #eff0fb
+bottom cards color = #ffffff

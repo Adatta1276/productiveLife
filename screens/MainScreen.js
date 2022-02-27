@@ -8,7 +8,7 @@ import {
   Image,
   useWindowDimensions,
   TouchableOpacity,
-  TouchableNativeFeedback
+  TouchableNativeFeedback,
 } from "react-native";
 import ProgressBar from "react-native-animated-progress";
 import CircularProgress from "react-native-circular-progress-indicator";
@@ -17,6 +17,7 @@ import { useFonts } from "expo-font";
 //785,410
 //110,180
 //7.14, 2.3 (RATIO OF HEIGHTS, RATIO OF WIDTHS)
+
 export default function MainScreen() {
   const window = useWindowDimensions();
   const [loaded] = useFonts({
@@ -31,62 +32,19 @@ export default function MainScreen() {
   }
   return (
     <View style={styles.container}>
-      <View style={styles.topView}>
-      <TouchableOpacity style={[styles.menuIcon, { top: "40.5%" }]}>
+      <Text style={styles.appBarText}>Hello, Ayush</Text>
+      <Image
+        style={styles.notifImg}
+        source={require("../assets/icons/bell_icon.png")}
+      />
+      <View style={styles.dot}></View>
+      <View style={styles.topCard}>
         <Image
-          source={require("../assets/icons/menu2.png")}
-          style={{width: 39,
-    height: 30,}}
+          style={styles.topCardImg}
+          source={require("../assets/images/topCardImg.jpg")}
         />
-        </TouchableOpacity>
-        <TouchableOpacity style={[
-            styles.menuIcon,
-            { width: 30, height: 32, right: "1%", left: "41%", top: "30%" },
-          ]}>
-        <Image
-          source={require("../assets/icons/search.png")}
-          style={{width:30, height:32}}
-        /></TouchableOpacity>
-        <Image
-          source={require("../assets/images/boy.png")}
-          style={styles.avatar}
-        ></Image>
-
-        <Text
-          style={{
-            fontFamily: "Poppins-Bold",
-            fontSize: 25,
-            left: "15%",
-            top: "14%",
-          }}
-        >
-          Ayush Datta
-        </Text>
-        <Text
-          style={{
-            fontFamily: "Poppins",
-            fontSize: 17,
-            left: "15%",
-            top: "14%",
-            opacity: 0.6,
-          }}
-        >
-          Student, coder
-        </Text>
-        <View style={{ right: "25%", bottom: "21%" }}>
-          <CircularProgress
-            value={100}
-            activeStrokeWidth={8}
-            radius={60}
-            duration={2000}
-            textColor={"transparent"}
-            activeStrokeColor={"#e46471"}
-            inActiveStrokeColor={"transparent"}
-            maxValue={200}
-            titleColor={"white"}
-            titleStyle={{ fontWeight: "bold" }}
-          />
-        </View>
+        <Text style={styles.todayTxt}>Today</Text>
+        <Text style={styles.tasksCompletedTxt}>2/10 tasks</Text>
       </View>
       <StatusBar style="auto" />
     </View>
@@ -95,12 +53,62 @@ export default function MainScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#6588e4", //#2659d9, #1f47ad
+    backgroundColor: "rgb(255,255,255)", //#2659d9, #1f47ad
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },
-  topView: {
+  appBarText: {
+    fontFamily: "Poppins-Bold",
+    fontSize: 23,
+    bottom: "28%",
+    right: "22%",
+  },
+  notifImg: {
+    width: 30,
+    height: 30,
+    left: "40%",
+    bottom: "33%",
+  },
+  dot: {
+    backgroundColor: "#06ceaa",
+    width: 7.5,
+    height: 7.5,
+    borderRadius: 50,
+    bottom: "36.8%",
+    left: "42.6%",
+  },
+  topCard: {
+    backgroundColor: "#6d4bfa",
+    width: "87%",
+    height: "18%",
+    borderRadius: 31,
+    bottom: "29%",
+    justifyContent: "center",
+  },
+  topCardImg: {
+    width: "59%",
+    height: "89%",
+    left: "37%",
+    top: "26%",
+  },
+  todayTxt: {
+    fontFamily: "Poppins",
+    color: "#ffffff",
+    left: "8%",
+    fontSize: 18,
+    opacity: 0.8,
+    bottom: "52%",
+  },
+  tasksCompletedTxt: {
+    fontFamily: "Poppins-Bold",
+    color: "#ffffff",
+    left: "8%",
+    fontSize: 25,
+    opacity: 0.8,
+    bottom: "28%",
+  },
+  /*topView: {
     backgroundColor: "#1f47ad",
     width: "100%",
     height: "38%",
@@ -125,5 +133,5 @@ const styles = StyleSheet.create({
     //borderWidth: 2,
     //borderColor: "#e46471",
     borderRadius: 100,
-  },
+  },*/
 });
