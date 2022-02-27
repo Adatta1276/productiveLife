@@ -85,11 +85,12 @@ const styles = StyleSheet.create({
     borderRadius: 31,
     bottom: "29%",
     justifyContent: "center",
+    overflow: "hidden",
   },
   topCardImg: {
     width: "59%",
     height: "89%",
-    left: "37%",
+    left: "39%",
     top: "26%",
   },
   todayTxt: {
@@ -98,7 +99,7 @@ const styles = StyleSheet.create({
     left: "8%",
     fontSize: 18,
     opacity: 0.8,
-    bottom: "52%",
+    bottom: "50%",
   },
   tasksCompletedTxt: {
     fontFamily: "Poppins-Bold",
