@@ -1,11 +1,9 @@
-1st card color = #309398
-2nd card color = #e46471
-3rd card color = #f9be7c
-4th card color = #6588e4
+@mainscreen : 
 
+bg color : #010101
+text color: #ffffff
+checkbox (state:checked) background color: #ff7960
+checkbox (state:unchecked) background color: 'transparent' (it needs to have a grey border when unchecked)
+gradient Progress colors : ['#3e2cb6','#5f3bad','#995398','#ff7962']
 
-
-BACKGROUND COLOR = #fff
-top card color = #6f4bff
-to do card color = #eff0fb
-bottom cards color = #ffffff
+FONTS : 'Poppins', 'Proxima Nova'(if needed), 'Poppins-Bold'

@@ -24,11 +24,11 @@ var appTheme = "dark";
 var themeData = {
   darkTheme: {
     textColor: "#ffffff",
-    buttonShadowRadius: 17,
+    buttonShadowRadius: 6,
   },
   lightTheme: {
     textColor: "#000000",
-    buttonShadowRadius: 10,
+    buttonShadowRadius: 5,
   },
 };
 
