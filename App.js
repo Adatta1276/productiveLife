@@ -16,6 +16,7 @@ import { Shadow } from "react-native-shadow-2";
 import { useFonts } from "expo-font";
 import { Constants } from "expo-constants";
 import MainScreen from "./screens/MainScreen";
+import ErrorScreen from "./screens/errorScreen";
 const Stack = createNativeStackNavigator();
 
 var clickCount = 0;
@@ -66,6 +67,11 @@ export default function App() {
         <Stack.Screen
           name="MainScreen"
           component={MainScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ErrorScreen"
+          component={ErrorScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
@@ -139,7 +145,7 @@ function OnboardingScreen({ navigation }) {
           justifyContent: "center",
         }}
         onPress={() => {
-          navigation.navigate("MainScreen");
+          navigation.navigate("ErrorScreen");
         }}
       >
         <Text
